@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="utf-8">
+    <head>
+        <title>New API</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    .container{
+        border-radius:8px;
+        margin:20px;
+        width:90%;
+    }
+    div{
+        text-align: justify;
+        word-wrap: break-word;
+    }
+    .container h2{
+        position: sticky;
+        top:0;
+        z-index:10;
+    }
+    .container p{
+        text-align: justify;
+    }
+    .img-cont{
+        width:100%;
+        margin:auto;
+    }
+    @media only screen and (min-width:765px){
+        .container{
+        width:30%;
+        height:600px;
+        margin-left:10px;
+        border-radius:8px;
+        float:left;
+        overflow: scroll;
+        position: fixed;
+    }
+    .img-cont{
+        width:65%;
+        height:600px;
+        position: absolute;
+        right: 20px;
+    }
+
+    }
+    
+  </style>
+    </head>
+    <body class="bg-light">
+        <div class="container bg-info mt-2 p-1">
+            <h2 class="alert bg-dark text-warning h2 text-center m-2">NASA PUBLIC API</h2>
+            <p class="p-1 m-2 alert bg-light h5">NASA space agency made public several data including images and videos for curious people to explore the universe. This data can be explored by using their open APIs that anyone can use to develop relevant applications.</p>
+            <div class='h5 p-2'>DATE:<div  id="text1" ></div>
+            </div>
+            <div class='h5 p-2'>DETAILS:<div id="text2"></div></div>
+            <div class="h5 p-2">RETURNING URL:<div id="text3"></div></div>
+        </div>
+            <div class="mt-2 img-cont">
+                <img id="img" width="100%">
+            </div>
+            
+        <script>
+            
+            let method = 'GET';
+            let myKey = "GuYpXS9ajRQhuTabtxbahVQtOdi72Y8aP61UyN0w";
+            let url = "https://api.nasa.gov/planetary/apod?api_key="+ myKey;
+            getContent(url);
+            async function getContent(file){
+             let a = await fetch(file);
+             let b = await  a.json();
+             let date = b.date;
+             let details = b.explanation;
+             let img_Src = b.hdurl;
+             let apiUrl = b.url;
+            document.querySelector('#text1').textContent = date;
+            document.querySelector('#text2').textContent = details;
+            document.querySelector('#text3').textContent = apiUrl;
+            img.src=img_Src;
+            }
+        </script>
+    </body>
+</html>
