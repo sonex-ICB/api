@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <div id="container">
+            <h3 id="name"></h3>
+            <p id="city"></p>
+            <p id="state"></p>
+            <p id="country"></p>
+        </div>
+        <p id="demo">Fetch a file to change this text.</p>
+
+<script>
+	myUrl = 'https://randomuser.me/api/';
+	getText(myUrl);
+	async function getText(text){
+		let a = await fetch(text);
+		let b = await a.json();
+		let name, city,state,country,postcode,desc,email,pass;
+		let title =b.results[0].name.title;
+		let first =b.results[0].name.first;
+		let last =b.results[0].name.last;
+			name = title +' '+first+' '+last;
+		 	city = b.results[0].location.city;
+			country = b.results[0].location.country;
+			state = b.results[0].location.state;
+			let timezone = b.results[0].location.timezone.description;
+			alert(timezone);
+
+		document.getElementById('name').innerHTML = name;
+		document.getElementById('city').innerHTML = city;
+		document.getElementById('state').innerHTML = state;
+		document.getElementById('country').innerHTML = country;
+		document.getElementById('demo').innerHTML = timezone;
+	}
+
+    
+</script>
+    </body>
+</html>
+<!--
+     
+-->
