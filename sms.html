@@ -8,9 +8,39 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
      </head>
     <body class="bg-light">
-        <div class="container bg-info mt-2 p-1">
-            <h2 class="alert bg-dark text-warning h2 text-center m-2">NASA PUBLIC API</h2>
-            <p class="p-1 m-2 alert bg-light h5">NASA space agency made public several data including images and videos for curious people to explore the universe. This data can be explored by using their open APIs that anyone can use to develop relevant applications.</p>
+        <div class="container bg-dark rounded mt-2 p-1">
+            <h2 class="alert bg-dark border-info text-warning h2 text-center m-2">bytesNET FREE WEB SMS </h2>
+            <p class="p-3 mx-auto alert bg-light w-50 h6">Please specify Your Message below</p>
+            <form>
+                <div class="form-check p-3">
+                    <label class="text-info">Recievers Phone Number</label>
+                    <input type="number" id='phone' placeholder="E.g 08012345678"  class="form-control border-0 text-info border-bottom bg-dark"/> 
+                </div>
+                <div class="form-check p3">
+                    <label class="text-info">Sender Name</label>
+                    <input type="text" id="sender" placeholder="E.g bytesNET"  class="form-control border-0 text-info border-bottom bg-dark"/> 
+                </div>
+                <div class="form-check p-3">
+                    <label class="text-info">Message Body</label>
+                    <textarea type="Text" id='msg' placeholder="E.g Hello! Have fun"  rows="5" class="form-control border-info text-info bg-dark"></textarea> 
+                </div>
+                <div class="form-check p3">
+                    <label class="text-info">Message Type</label>
+                    <select id="msgType" class="form-control border-0 text-info border-bottom bg-dark">
+                        <option>Text Message</option>
+                        <option>Flash Message</option>
+                    </select>
+                </div>
+                <div class="form-check p-3">
+                    <button type="button" onclick="send()" class=" border-primary btn text-light"><strong>SEND</strong>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="aqua" class="bi-send-fill" viewBox="0 0 16 16">
+                            <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/>
+                          </svg>
+                    </button> 
+                </div>
+                
+                
+            </form>
             <div class='h5 p-2'>DATE:<div  id="text1" ></div>
             </div>
             <div class='h5 p-2'>DETAILS:<div id="text2"></div></div>
@@ -21,15 +51,24 @@
             </div>
             
         <script>
+            function send(){
             let user='sonex2316@gmail.com';
-            let sender ='solomon';
-            let msg= 'Hello world';
-            let rec = '08074810067';
-            let flash = 1;
+            
+            let sender =document.getElementById('sender').value;
+            let msg= document.getElementById('msg').value;
+            let rec = document.getElementById('phone').value;
+            let flash = document.getElementById('msgType').value;
+            if (flash=='Text Message'){
+                flash='1';
+            }
+            if(flash=='Flash Message'){
+                flash='0';
+            }
             let myKey = "24890f7cf467e3b8bb7ef3058c677382414c21c0";
             let para = user+'&apikey='+myKey+'&sender='+sender+'&messagetext='+msg+'&flash=1'+'&recipients='+rec;
             let url = 'https://api.ebulksms.com:8080/sendsms?username='+para;
                 //let url = "https://api.nasa.gov/planetary/apod?api_key="+ myKey;
+            
             getContent(url);
             async function getContent(file){
              let a = await fetch(file);
@@ -37,6 +76,7 @@
              alert(typeof b);
              document.querySelector('#text1').textContent=b;
             }
+        }
             
         </script>
     </body>

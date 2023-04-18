@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="eng_us">
+    <head>
+        <title>???</title>
+        <meta charset='utf-8'>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <style>
+            body{position:fixed;margin:0;padding: 0; width:100%; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: rgb(18, 14, 39);}
+            #side{
+                overflow:auto;
+                padding:10px;
+                color: antiquewhite;
+            }
+            .side{
+                display:none;
+                position: absolute;
+                background-color: black;
+                width:60%;
+                left:0;
+                opacity: 0.9;
+            }
+            h2{
+                background-color: aqua;
+                margin:0;
+                padding: 30px;
+                text-align: center;
+            }
+            .d-cont{
+                display: flex;
+                margin:0;
+                text-align: center;
+                padding:10px;
+                margin-top:20px;
+            }
+            button,input{
+                padding: 15px;
+                margin:4px;
+                font-size: 16px;
+                background-color: aquamarine;
+                border:0;outline: 0;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            button:hover,input:hover{
+                background-color: rgb(253, 255, 254);
+            }
+            input{
+                display: block;
+                margin:auto;
+                background-color: aliceblue;
+            }
+            .btn{
+                width:50%;
+            }
+            #history{color:aliceblue;font-weight: 700;cursor: pointer;}
+            #history:hover{color:rgb(153, 176, 197);font-weight: 700;cursor: pointer;}
+            @media only screen and (min-width:765px){
+                .d-cont{
+                    width:80%;
+                    margin:auto;
+                
+                }
+                .side{
+                    display: block;
+                    width:20%;
+                    position: relative;
+                    background-color: transparent;
+                }
+                button{
+                    padding:35px;
+                    width:auto;
+                }
+                input{
+                    width:100%;
+                }
+                .side button{
+                    padding:20px;
+                    color:aliceblue;
+                    background:gray;
+                }
+                #history{
+                    display: none;
+                }
+            }
+        </style>
+    </head>
+    <body>
+      <header>
+          <h2>CALC()::+/::</h2>
+      </header>
+      <p id='history'>History</p>
+      <div class="d-cont">
+         <div class='side'>
+             <button onclick="clearHistory()">CC</button>
+             <div id='side'></div>
+         </div>
+        <div class="d-pad">
+                <input type="text" id='ans'>
+                <div>
+                    <button type="button"  onclick="nine(7)"><strong>7</strong></button>
+                    <button type="button"  onclick="nine(8)"><strong>8</strong></button>
+                    <button type="button"  onclick="nine(9)"><strong>9</strong></button>
+                </div>
+                <div>
+                    <button type="button"  onclick="nine(4)"><strong>4</strong></button>
+                    <button type="button"  onclick="nine(5)"><strong>5</strong></button>
+                    <button type="button"  onclick="nine(6)"><strong>6</strong></button>
+                </div>
+                <div>
+                    <button type="button"  onclick="nine(1)"><strong>1</strong></button>
+                    <button type="button"  onclick="nine(2)"><strong>2</strong></button>
+                    <button type="button"  onclick="nine(3)"><strong>3</strong></button>
+                </div>
+                <div>
+                    <button type="button"  onclick="c()"><strong>C</strong></button>
+                    <button type="button"  onclick="nine(0)"><strong>0</strong></button>
+                    <button type="button"  onclick="cc()"><strong>CC</strong></button>
+                </div>
+            </div>
+            <div class="d-pad">
+                <button type="button" class='btn' onclick="nine('+')"><strong>+</strong></button>
+                <button type="button" class='btn' onclick="nine('-')"><strong>-</strong></button>
+                <button type="button" class='btn' onclick="nine('/')"><strong>/</strong></button>
+                <button type="button" class='btn' onclick="nine('*')"><strong>X</strong></button>
+                <button type="button" class='btn' id='solve'><strong>=</strong></button>
+            </div>
+      </div>
+    </body>
+    <script>
+    $(document).ready(function(){
+       if(even.key){
+        //
+       }
+      $('#solve').click(function(){
+        let ans = $('#ans').val();
+        newAns = eval(ans);
+        $('#ans').val(newAns);
+        let side = $('#side').html();
+         let elt= '<div class="text-light">'+ans+'='+newAns+'</div>';
+        if(ans==''){
+            $('#side').html(side);
+        }
+        else{
+            let y = newAns==ans;
+            if(y==true){
+                $('#side').html(side);
+            }else{
+                $('#side').html(side+elt);
+            } 
+        }         
+      });
+
+    })
+    $('#history').click(function(){
+        $('.side').toggle('slow'); 
+    });
+
+    //
+    $('#solve').dblclick(function(){
+            cc();
+        });
+    // functions
+    function nine(a){
+        let ans = $('#ans').val();
+        $('#ans').val(ans.concat(a))
+    }
+    //C
+    function c(){
+        let ans = $('#ans').val();
+        ans = ans.slice(0,-1);
+        $('#ans').val(ans);
+    }
+    //CC
+    function cc(){
+        let ans = $('#ans').val('');
+       // $('#ans').val(ans.concat(a))
+    }
+    //clearHistory
+    function clearHistory(){
+        $('#side').html('');
+    }
+    </script>
+</html>
